@@ -2,9 +2,7 @@
 @ECHO off
 SET VERSION=0.3.3.7.EZS.Enmity-1.4.0.2
 ECHO "Removing Old Build..."
-RMDIR /s /q "%~dp0\Build"
-DEL *.zip
-DEL buildlog.txt
+CALL CLEAN
 
 ECHO "Locating ACT..."
 SET OP_DIR=%~dp0\..\OverlayPlugin
