@@ -1,0 +1,9 @@
+HtmlRenderer.dll
+LICENSE.txt
+OverlayPlugin.Common.dll
+OverlayPlugin.Core.dll
+OverlayPlugin.dll
+README.md
+resources/*
+ja-JP/*.dll
+addons/*.dll

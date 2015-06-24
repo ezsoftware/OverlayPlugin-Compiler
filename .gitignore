@@ -1,0 +1,3 @@
+*.zip
+Build/*
+buildlog.txt
