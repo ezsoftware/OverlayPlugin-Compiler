@@ -1,9 +1,12 @@
 [submodule "OverlayPlugin"]
 	path = OverlayPlugin
 	url = https://github.com/ezsoftware/OverlayPlugin.git
+	branch = CompiledOutput
 [submodule "ACT_EnmityPlugin"]
 	path = ACT_EnmityPlugin
 	url = https://github.com/ezsoftware/ACT_EnmityPlugin.git
+	branch = master
 [submodule "OverlayPlugin-themes"]
 	path = OverlayPlugin-themes
 	url = https://github.com/ezsoftware/OverlayPlugin-themes.git
+	branch = master
