@@ -1,6 +1,6 @@
 @SETLOCAL
 @ECHO off
-SET VERSION=0.3.3.7.EZS.Enmity-1.4.0.2
+SET VERSION=0.3.3.7.EZS.Enmity-1.4.0.4
 ECHO "Removing Old Build..."
 CALL CLEAN
 
