@@ -7,15 +7,11 @@ CALL CLEAN
 ECHO "Locating ACT..."
 SET OP_DIR=%~dp0\..\OverlayPlugin
 SET ACT=Advanced Combat Tracker.exe
-IF NOT EXIST "%OP_DIR%\Thirdparty\ACT\%ACT%" (
-  ECHO "%ProgramFiles(x86)%\Advanced Combat Tracker\%ACT%"
-  pause
-  IF EXIST "%ProgramFiles(x86)%\Advanced Combat Tracker\%ACT%" (
-    COPY "%ProgramFiles(x86)%\Advanced Combat Tracker\%ACT%" "%OP_DIR%\Thirdparty\ACT\%ACT%"
-  ) ELSE (
-    ECHO "ACT Not Found, please install Advanced Combat Tracker";
-    GOTO END
-  )
+IF EXIST "%ProgramFiles(x86)%\Advanced Combat Tracker\%ACT%" (
+	XCOPY "%ProgramFiles(x86)%\Advanced Combat Tracker\%ACT%" "%OP_DIR%\Thirdparty\ACT\" /E /Y
+) ELSE (
+	ECHO "ACT Not Found, please install Advanced Combat Tracker";
+	GOTO END
 )
 ECHO "ACT Found."
 ECHO "Building OverlayPlugin..."
