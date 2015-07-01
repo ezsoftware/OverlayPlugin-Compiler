@@ -1,15 +1,18 @@
-XCOPY "%ProgramFiles(x86)%\Advanced Combat Tracker\Advanced Combat Tracker.exe" "%~dp0ACT_EnmityPlugin\Thirdparty\ACT\" /E /I /Y
+XCOPY "%ProgramFiles(x86)%\Advanced Combat Tracker\Advanced Combat Tracker.exe" "%~dp0ACT_EnmityPlugin\Thirdparty\ACT\" /Y
 
-XCOPY "%~dp0Build\%2\%1\OverlayPlugin.Core.dll" "%~dp0ACT_EnmityPlugin\Thirdparty\OverlayPlugin\" /E /I /Y
+XCOPY "%~dp0Build\%2\%1\OverlayPlugin.dll" "%~dp0ACT_EnmityPlugin\Thirdparty\OverlayPlugin\" /Y
 
-XCOPY "%~dp0Build\%2\%1\OverlayPlugin.Common.dll" "%~dp0ACT_EnmityPlugin\Thirdparty\OverlayPlugin\" /E /I /Y
+XCOPY "%~dp0Build\%2\%1\OverlayPlugin.Core.dll" "%~dp0ACT_EnmityPlugin\Thirdparty\OverlayPlugin\" /Y
 
-XCOPY "%~dp0Build\%2\%1\HtmlRenderer.dll" "%~dp0ACT_EnmityPlugin\Thirdparty\OverlayPlugin\" /E /I /Y
+XCOPY "%~dp0Build\%2\%1\OverlayPlugin.Common.dll" "%~dp0ACT_EnmityPlugin\Thirdparty\OverlayPlugin\" /Y
 
-XCOPY "%AppData%\Advanced Combat Tracker\Plugins\FFXIV_ACT_Plugin.dll" "%~dp0ACT_EnmityPlugin\Thirdparty\FFXIV_ACT_Plugin\" /E /I /Y
+XCOPY "%~dp0Build\%2\%1\HtmlRenderer.dll" "%~dp0ACT_EnmityPlugin\Thirdparty\OverlayPlugin\" /Y
 
-set DOTNET_PATH=%windir%\Microsoft.NET\Framework\v4.0.30319
-%DOTNET_PATH%\msbuild /t:Rebuild /p:Configuration=Release /p:Platform="Any CPU" /p:OutputPath="%~dp0\Build\%2\%1" "%~dp0\..\ACT_EnmityPlugin\EnmityPlugin.sln"
+XCOPY "%AppData%\Advanced Combat Tracker\Plugins\FFXIV_ACT_Plugin.dll" "%~dp0ACT_EnmityPlugin\Thirdparty\FFXIV_ACT_Plugin\" /Y
+
+CALL "%~dp0ACT_EnmityPlugin\build"
+
+XCOPY "%~dp0ACT_EnmityPlugin\build\*" "%~dp0Build\%2\%1\" /E /I /Y
 
 XCOPY "%~dp0enmity.en.html" "%~dp0Build\%2\%1\resources\" /Y
 
