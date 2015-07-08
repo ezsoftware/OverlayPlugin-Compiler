@@ -6,7 +6,7 @@ if not exist %DOTNET_PATH% (
 	goto END
 )
 
-%DOTNET_PATH%\msbuild /t:Rebuild /p:Configuration=%2 /p:Platform=%1 /p:OutputPath="%~dp0\Build\%2\%1" "%~dp0\..\OverlayPlugin\OverlayPlugin.sln"
+%DOTNET_PATH%\msbuild /t:Rebuild /p:Configuration=%2 /p:Platform=%1 /p:OutputPath="%~dp0\Build\%2\%1" "%~dp0OverlayPlugin\OverlayPlugin.sln"
 
 DEL "%~dp0\Build\%2\%1\Advanced Combat Tracker.exe"
 

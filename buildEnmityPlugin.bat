@@ -10,6 +10,4 @@ IF NOT EXIST "%~dp0ACT_EnmityPlugin\build\addons\EnmityOverlay.dll" (
 
 XCOPY "%~dp0ACT_EnmityPlugin\build\*" "%~dp0Build\%2\%1\" /E /I /Y
 
-XCOPY "%~dp0enmity.en.html" "%~dp0Build\%2\%1\resources\" /Y
-
 :END

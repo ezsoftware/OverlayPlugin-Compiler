@@ -5,7 +5,7 @@ ECHO "Removing Old Build..."
 CALL CLEAN
 
 ECHO "Locating ACT..."
-SET OP_DIR=%~dp0\..\OverlayPlugin
+SET OP_DIR=%~dp0OverlayPlugin
 SET ACT=Advanced Combat Tracker.exe
 IF EXIST "%ProgramFiles(x86)%\Advanced Combat Tracker\%ACT%" (
 	XCOPY "%ProgramFiles(x86)%\Advanced Combat Tracker\%ACT%" "%OP_DIR%\Thirdparty\ACT\" /E /Y
