@@ -3,4 +3,4 @@ Build/*
 buildlog.txt
 Advanced Combat Tracker.exe
 FFXIV_ACT_Plugin.dll
-OverlayPluginSetup.exe
+OverlayPluginSetup.*.exe
