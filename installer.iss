@@ -85,7 +85,7 @@ begin
       if IsComponentSelected('full_standard') or IsComponentSelected('full_streamer') then full_update := 'Full' else full_update := 'Update';
       if IsComponentSelected('full_standard') or IsComponentSelected('update_standard') then standard_streamer := 'Standard' else standard_streamer := 'Streamer';
       if IsWin64 then x64_x86 := 'x64' else x64_x86 := 'x86';
-      file := 'https://github.com/ezsoftware/OverlayPlugin/releases/download/v{#MyAppVersion}/OverlayPlugin.' + full_update + '.' 
+      file := 'https://github.com/ezsoftware/OverlayPlugin-Compiler/releases/download/v{#MyAppVersion}/OverlayPlugin.' + full_update + '.' 
         + standard_streamer + '.{#MyAppVersion}.' + x64_x86 + '.zip';
       idpAddFile(file, ExpandConstant(targetPath)); 
     end;
