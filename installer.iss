@@ -40,6 +40,7 @@ Name: update_standard; Description: "Update"; Types: update_standard;
 Name: update_streamer; Description: "Update"; Types: update_streamer;
 
 [Files]
+Source: "ThirdParty\NDP46-KB3045560-Web.exe"; DestDir: {tmp}; Flags: deleteafterinstall; AfterInstall: InstallFramework; Check: FrameworkIsNotInstalled
 Source: "C:\Program Files\7-Zip\7za.exe"; DestDir: "{tmp}"; Flags: dontcopy
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
@@ -96,4 +97,30 @@ begin
     begin
         DoUnzip(targetPath, ExpandConstant('{app}'));
     end;
+end;
+function FrameworkIsNotInstalled: Boolean;
+begin
+  Result := not RegKeyExists(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\.NETFramework\v4.0.30319\SKUs\.NETFramework,Version=v4.6');
+end;
+procedure InstallFramework;
+var
+  StatusText: string;
+  ResultCode: Integer;
+begin
+  StatusText := WizardForm.StatusLabel.Caption;
+  WizardForm.StatusLabel.Caption := 'Installing .NET framework...';
+  WizardForm.ProgressGauge.Style := npbstMarquee;
+  try
+    begin
+      if not Exec(ExpandConstant('{tmp}\dotNetFx40_Full_x86_x64.exe'), '/q /norestart', '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
+      begin
+        // you can interact with the user that the installation failed
+        MsgBox('.NET installation failed with code: ' + IntToStr(ResultCode) + '.',
+          mbError, MB_OK);
+      end;
+    end;
+  finally
+    WizardForm.StatusLabel.Caption := StatusText;
+    WizardForm.ProgressGauge.Style := npbstNormal;
+  end;
 end;
