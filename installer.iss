@@ -3,7 +3,7 @@
 #include <idp.iss>
 
 #define MyAppName "ACT OverlayPlugin Bundle"
-#define MyAppVersion "0.3.3.8.EZS.Enmity-1.6.3.0"
+#define MyAppVersion "0.3.3.8.EZS.Enmity-1.6.3.1"
 #define MyAppPublisher "RainbowMage, XTuaok and EZSoftware"
 
 [Setup]
@@ -40,7 +40,6 @@ Name: update_standard; Description: "Update"; Types: update_standard;
 Name: update_streamer; Description: "Update"; Types: update_streamer;
 
 [Files]
-Source: "ThirdParty\NDP46-KB3045560-Web.exe"; DestDir: {tmp}; Flags: deleteafterinstall; AfterInstall: InstallFramework; Check: FrameworkIsNotInstalled
 Source: "C:\Program Files\7-Zip\7za.exe"; DestDir: "{tmp}"; Flags: dontcopy
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
@@ -54,6 +53,33 @@ var
    full_update: String;
    standard_streamer: String;
    x64_x86: String;
+   frameworkNotInstalled: Boolean;
+function FrameworkIsNotInstalled: Boolean;
+begin
+  Result := not RegKeyExists(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\.NETFramework\v4.0.30319\SKUs\.NETFramework,Version=v4.6');
+end;
+procedure InstallFramework;
+var
+  StatusText: string;
+  ResultCode: Integer;
+begin
+  StatusText := WizardForm.StatusLabel.Caption;
+  WizardForm.StatusLabel.Caption := 'Installing .NET framework...';
+  WizardForm.ProgressGauge.Style := npbstMarquee;
+  try
+    begin
+      if not Exec(ExpandConstant('{tmp}\DP46-KB3045560-Web.exe'), '/q /norestart', '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
+      begin
+        // you can interact with the user that the installation failed
+        MsgBox('.NET installation failed with code: ' + IntToStr(ResultCode) + '.',
+          mbError, MB_OK);
+      end;
+    end;
+  finally
+    WizardForm.StatusLabel.Caption := StatusText;
+    WizardForm.ProgressGauge.Style := npbstNormal;
+  end;
+end;
 procedure DoUnzip(source: String; targetdir: String);
 begin
     ExtractTemporaryFile('7za.exe');
@@ -81,8 +107,14 @@ procedure CurPageChanged(CurPageID: Integer);
 begin
     if CurPageID = wpReady then
     begin
+    idpClearFiles;
+    frameworkNotInstalled := FrameworkIsNotInstalled();
+	  if(frameworkNotInstalled) then
+	  begin
+		targetPath := ExpandConstant('{tmp}\DP46-KB3045560-Web.exe');
+		idpAddFile('https://github.com/ezsoftware/OverlayPlugin-Compiler/releases/download/v0.3.3.8.EZS.Enmity-1.6.3.0/NDP46-KB3045560-Web.exe', ExpandConstant(targetPath));
+	  end;
       targetPath := ExpandConstant('{tmp}\OverlayPlugin.zip')
-      idpClearFiles;
       if IsComponentSelected('full_standard') or IsComponentSelected('full_streamer') then full_update := 'Full' else full_update := 'Update';
       if IsComponentSelected('full_standard') or IsComponentSelected('update_standard') then standard_streamer := 'Standard' else standard_streamer := 'Streamer';
       if IsWin64 then x64_x86 := 'x64' else x64_x86 := 'x86';
@@ -95,32 +127,11 @@ procedure CurStepChanged(CurStep: TSetupStep);
 begin
     if CurStep = ssPostInstall then 
     begin
+    frameworkNotInstalled := FrameworkIsNotInstalled();
+	  if(frameworkNotInstalled) then
+    begin
+			InstallFramework();
+		end;
         DoUnzip(targetPath, ExpandConstant('{app}'));
     end;
-end;
-function FrameworkIsNotInstalled: Boolean;
-begin
-  Result := not RegKeyExists(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\.NETFramework\v4.0.30319\SKUs\.NETFramework,Version=v4.6');
-end;
-procedure InstallFramework;
-var
-  StatusText: string;
-  ResultCode: Integer;
-begin
-  StatusText := WizardForm.StatusLabel.Caption;
-  WizardForm.StatusLabel.Caption := 'Installing .NET framework...';
-  WizardForm.ProgressGauge.Style := npbstMarquee;
-  try
-    begin
-      if not Exec(ExpandConstant('{tmp}\dotNetFx40_Full_x86_x64.exe'), '/q /norestart', '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
-      begin
-        // you can interact with the user that the installation failed
-        MsgBox('.NET installation failed with code: ' + IntToStr(ResultCode) + '.',
-          mbError, MB_OK);
-      end;
-    end;
-  finally
-    WizardForm.StatusLabel.Caption := StatusText;
-    WizardForm.ProgressGauge.Style := npbstNormal;
-  end;
 end;
