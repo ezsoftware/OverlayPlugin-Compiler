@@ -3,7 +3,7 @@
 #include <idp.iss>
 
 #define MyAppName "ACT OverlayPlugin Bundle"
-#define MyAppVersion "0.3.3.9.EZS.Enmity-1.6.7.1"
+#define MyAppVersion "0.3.3.9.EZS.Enmity-1.6.8.0"
 #define MyAppPublisher "RainbowMage, XTuaok and EZSoftware"
 
 [Setup]
