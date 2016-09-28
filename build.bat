@@ -1,6 +1,6 @@
 @SETLOCAL
 @ECHO off
-SET VERSION=0.3.3.9.EZS.Enmity-1.6.8.0-v2
+SET VERSION=0.3.3.9.EZS.Enmity-1.6.9.0
 ECHO "Removing Old Build..."
 CALL CLEAN
 
@@ -26,6 +26,8 @@ CALL buildOverlayPlugin x64 streamer >> buildlog.txt
 ECHO "Releases..."
 CALL buildReleases %VERSION% >> buildlog.txt
 
+ECHO "Building Installer..."
+call "C:\Program Files (x86)\Inno Setup 5\ISCC.exe" %~dp0installer.iss /dMyAppVersion=%VERSION%
 
 :END
 PAUSE
