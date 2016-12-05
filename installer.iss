@@ -4,7 +4,7 @@
 
 #define MyAppName "ACT OverlayPlugin Bundle"
 ; #define MyAppVersion "0.3.3.9.EZS.Enmity-1.6.9.0" --included from batch file now
-#define MyAppPublisher "RainbowMage, XTuaok and EZSoftware"
+#define MyAppPublisher "RainbowMage, Hibiyasleep, XTuaok and EZSoftware"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -18,8 +18,8 @@ AppPublisher={#MyAppPublisher}
 DefaultDirName={pf32}\Advanced Combat Tracker\OverlayPlugin
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=C:\Users\john_000\Repos\Personal\OverlayPlugin\LICENSE.txt
-OutputDir=C:\Users\john_000\Repos\Personal\OverlayPlugin-Compiler
+LicenseFile=OverlayPlugin\LICENSE.txt
+OutputDir=.\
 OutputBaseFilename=OverlayPluginSetup.{#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
