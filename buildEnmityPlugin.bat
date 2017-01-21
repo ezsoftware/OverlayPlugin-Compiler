@@ -8,6 +8,5 @@ IF NOT EXIST "%~dp0ACT_EnmityPlugin\build\addons\EnmityOverlay.dll" (
 	CALL "%~dp0ACT_EnmityPlugin\build"
 )
 
-XCOPY "%~dp0ACT_EnmityPlugin\build\*" "%~dp0Build\%2\%1\" /E /I /Y
-
+XCOPY "%~dp0ACT_EnmityPlugin\build\*" "%~dp0Build\%2\%1\" /E /I /Y /exclude:full.exclude
 :END
