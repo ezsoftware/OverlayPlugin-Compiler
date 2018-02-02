@@ -1,6 +1,6 @@
 @SETLOCAL
 @ECHO off
-SET VERSION=0.3.3.13.EZS.Enmity-1.8.0.0
+SET VERSION=0.3.4.0.EZS.Enmity-1.9.2.0.Cactbot-0.6.0
 ECHO "Removing Old Build..."
 CALL CLEAN
 
@@ -23,8 +23,13 @@ ECHO "x86 streamer..."
 CALL buildOverlayPlugin x86 streamer >> buildlog.txt
 ECHO "x64 streamer..."
 CALL buildOverlayPlugin x64 streamer >> buildlog.txt
+
+ECHO "Inject Cactbot"
+PAUSE
+
 ECHO "Releases..."
 CALL buildReleases %VERSION% >> buildlog.txt
+
 
 ECHO "Building Installer..."
 call "C:\Program Files (x86)\Inno Setup 5\ISCC.exe" %~dp0installer.iss /dMyAppVersion=%VERSION%
