@@ -4,7 +4,7 @@
 
 #define MyAppName "ACT OverlayPlugin Bundle"
 ; #define MyAppVersion "0.3.3.9.EZS.Enmity-1.6.9.0" --included from batch file now
-#define MyAppPublisher "RainbowMage, Hibiyasleep, XTuaok and EZSoftware"
+#define MyAppPublisher "RainbowMage, Hibiyasleep, XTuaok, Quisquous and EZSoftware"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.

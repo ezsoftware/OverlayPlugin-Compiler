@@ -1,8 +1,12 @@
 @SETLOCAL
 @ECHO off
-SET VERSION=0.3.4.0.EZS.Enmity-1.9.2.0.Cactbot-0.6.0
+SET VERSION=0.3.4.0.EZS.Enmity-1.9.2.01.Cactbot-0.6.1
 ECHO "Removing Old Build..."
 CALL CLEAN
+
+ECHO @echo off > createInstaller.bat
+ECHO SET VERSION=%VERSION% >> createInstaller.bat
+ECHO call "C:\Program Files (x86)\Inno Setup 5\ISCC.exe" %~dp0installer.iss /dMyAppVersion=%VERSION% >> createInstaller.bat
 
 ECHO "Locating ACT..."
 SET OP_DIR=%~dp0OverlayPlugin
@@ -32,7 +36,7 @@ CALL buildReleases %VERSION% >> buildlog.txt
 
 
 ECHO "Building Installer..."
-call "C:\Program Files (x86)\Inno Setup 5\ISCC.exe" %~dp0installer.iss /dMyAppVersion=%VERSION%
+call %~dp0createInstaller.bat
 
 :END
 PAUSE
