@@ -1,6 +1,6 @@
 @SETLOCAL
 @ECHO off
-SET VERSION=0.3.4.0.EZS.Enmity-1.9.2.01.Cactbot-0.6.2
+SET VERSION=0.3.4.0.EZS.Enmity-1.9.3.0.Cactbot-0.6.2
 ECHO "Removing Old Build..."
 CALL CLEAN
 
@@ -27,9 +27,6 @@ ECHO "x86 streamer..."
 CALL buildOverlayPlugin x86 streamer >> buildlog.txt
 ECHO "x64 streamer..."
 CALL buildOverlayPlugin x64 streamer >> buildlog.txt
-
-ECHO "Inject Cactbot"
-PAUSE
 
 ECHO "Releases..."
 CALL buildReleases %VERSION% >> buildlog.txt
