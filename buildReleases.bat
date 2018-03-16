@@ -1,5 +1,8 @@
 ECHO Injecting Cactbot into %2 %1
-XCOPY "%~dp0Cactbot\OverlayPlugin\*" "%~dp0Build\%2\%1\" /E /I /Y /exclude:full.exclude
+XCOPY "%~dp0Cactbot\OverlayPlugin\*" "%~dp0Build\release\x64\" /E /I /Y /exclude:full.exclude
+XCOPY "%~dp0Cactbot\OverlayPlugin\*" "%~dp0Build\release\x86\" /E /I /Y /exclude:full.exclude
+XCOPY "%~dp0Cactbot\OverlayPlugin\*" "%~dp0Build\streamer\x64\" /E /I /Y /exclude:full.exclude
+XCOPY "%~dp0Cactbot\OverlayPlugin\*" "%~dp0Build\streamer\x86\" /E /I /Y /exclude:full.exclude
 
 SET ZIP="%ProgramFiles%\7-Zip\7z.exe" a -tzip
 
