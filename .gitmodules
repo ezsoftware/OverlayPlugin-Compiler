@@ -10,3 +10,6 @@
 	path = OverlayPlugin-themes
 	url = https://github.com/ezsoftware/OverlayPlugin-themes.git
 	branch = master
+[submodule "cactbot"]
+	path = cactbot
+	url = D:/Repos/cactbot
