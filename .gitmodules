@@ -12,4 +12,4 @@
 	branch = master
 [submodule "cactbot"]
 	path = cactbot
-	url = D:/Repos/cactbot
+	url = https://github.com/ezsoftware/cactbot.git
